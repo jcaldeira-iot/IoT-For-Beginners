@@ -8,7 +8,7 @@ from azure.iot.hub import IoTHubRegistryManager
 from azure.iot.hub.models import CloudToDeviceMethod
 
 def main(event: func.EventHubEvent):    
-    body = json.loads(event.get_body().decode('utf-8'))
+    body = json.loads(json.loads(event.get_body().decode('utf-8')))
     device_id = event.iothub_metadata['connection-device-id']
 
     logging.info(f'Received message: {body} from {device_id}')
@@ -28,3 +28,4 @@ def main(event: func.EventHubEvent):
     registry_manager.invoke_device_method(device_id, direct_method)
 
     logging.info('Direct method request sent!')
+
