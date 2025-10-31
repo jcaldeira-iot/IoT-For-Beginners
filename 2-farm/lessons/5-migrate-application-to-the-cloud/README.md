@@ -438,7 +438,7 @@ To connect to the Registry Manager, you need a connection string.
 1. In the `main` method, add the following code:
 
     ```python
-    body = json.loads(event.get_body().decode('utf-8'))
+    body = json.loads(json.loads(event.get_body().decode('utf-8')))
     device_id = event.iothub_metadata['connection-device-id']
 
     logging.info(f'Received message: {body} from {device_id}')
